@@ -1,22 +1,25 @@
 import logo from './logo.svg';
 import './App.css';
 import { useState } from 'react';
+import { getSentences } from "./controller"
 
 function App() {
+
+  const sentences = getSentences()
+  const [userInput, setUserInput] = useState("")
   const [currentSentence, setCurrentSentence] = useState({
-    ger: <>Bei Andeo zu arbeiten ist eine grossartige <input />!</>,
+    res1: "Bei Andeo zu arbeiten ist eine grossartige ",
+    res2: " !",
     eng: "Working at Andeo is a great experience!",
     word: "Erfahrung"
   })
-  const sentences = [
-    {
-      ger: "Bei Andeo zu arbeiten ist eine grossartige Erfahrung!",
-      eng: "Working at Andeo is a great experience!"
-    }
-  ]
+  const [showResults, setShowResults] = useState(false)
+  const [result, setResult] = useState("")
+
+
 
   function prepSentences() {
-    let inputObj = sentences[0]
+    let inputObj = sentences[Math.floor(Math.random() * sentences.length)]
     let input = inputObj.ger
     //Get it as an Array to extract a random word
     let inputArr = input.split(" ")
@@ -27,33 +30,38 @@ function App() {
     }
     //Get the two curated Start and End Strings
     let strings = input.split(word)
-    let outputObj = { eng: inputObj.eng, ger: <>{strings[0]}<input />{strings[1]}</>, word: word }
+    let outputObj = { eng: inputObj.eng, res1: strings[0], res2: strings[1], word: word }
     setCurrentSentence(outputObj)
+    setShowResults(false)
+    setUserInput("")
   }
+
+  function checkResult() {
+    setResult(currentSentence.word === userInput ? "Richtig!" : "Falsch.")
+    setShowResults(true)
+  }
+
 
   return (
     <div className="App">
       <header >
         <h1>translate.</h1>
-
       </header >
       <section className="round">
-
         <div class="content shadow round">
           <h3>Original - English</h3>
-          <p>Lorem ipsum dolor sit olore magna aliquyam Lorem ipsum dolor sit amet,  sed diam nonumyaliquyam</p>
+          <p>{currentSentence.eng}</p>
         </div>
         <div class="content shadow round">
           <h3>Translate - Deutsch</h3>
-          <p>{currentSentence.ger}</p>
+          <p>{currentSentence.res1}<input value={userInput} onChange={e => setUserInput(e.target.value)} />{currentSentence.res2}</p>
         </div>
         <div className="shadow-inv-big round content result">
-          <button className="round green shadow">Check</button>
+          <button className="round green shadow" onClick={checkResult}>Check</button>
           <button className="round blue shadow" onClick={prepSentences}>Next</button>
-          <div className="shadow round">
-            <div>Deine Eingabe: "Der Storch"</div>
-            <div>Ergebnis: Korrekt</div>
-          </div>
+          {showResults && <div className="shadow round">
+            <div>Ergebnis: {result}</div>
+          </div>}
         </div>
       </section>
     </div >
