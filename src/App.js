@@ -62,13 +62,14 @@ function App() {
     if (langList[transLang + add].internal === "fr") sentence = sentences[id].fr;
     //Get it as an Array to extract a random word
     let inputArr = sentence.split(" ")
-    let word = inputArr[Math.floor(Math.random() * inputArr.length)]
+    let wordIndex = Math.floor(Math.random() * inputArr.length)
+    let word = inputArr[wordIndex]
     //Check if word has a special Char at the end and then remove it so it remains in the String when we later split it
     if (["!", ",", "."].some(v => word.includes(v))) {
       word = word.slice(0, -1)
     }
-    //Get the two curated Start and End Strings
-    let strings = sentence.split(word)
+    //Get the two curated Start and End Strings, cannot split(word) because the word can be featured multiple times
+    let strings = [inputArr.slice(0, wordIndex).join(" "), inputArr.slice(wordIndex + 1, inputArr.length).join(" ")]
     return { trans1: strings[0], trans2: strings[1], word: word, sentenceId: id }
 
   }
