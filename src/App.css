@@ -107,3 +107,20 @@ button{
     height: 50px;
     margin-right: 10px;
 }
+
+.green:hover{
+    background-color: rgb(169, 253, 169);
+}
+
+.blue:hover {
+    background-color: rgb(122, 204, 255);
+}
+
+.invisButton{
+    margin: 0;
+    padding: 0;
+    background-color: inherit;
+    font:inherit;
+    height: auto;
+    width: auto;
+}
