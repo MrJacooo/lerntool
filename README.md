@@ -1,7 +1,7 @@
 # Documentation
 to start this application run:
-git clone https://github.com/MrJacooo/lerntool.git
-npm i
+git clone https://github.com/MrJacooo/lerntool.git \n
+npm i \n
 npm start
 
 ## Description
