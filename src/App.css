@@ -65,7 +65,10 @@ input{
     border-bottom: darkgray 1px solid;
 }
 
-
+a{
+    color: inherit;
+    text-decoration: none;
+}
 
 /* -----------------------------------------------------
                     Multi Classes
@@ -123,4 +126,8 @@ button{
     font:inherit;
     height: auto;
     width: auto;
+}
+
+.btnImg {
+    height: 32px;
 }

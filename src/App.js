@@ -2,6 +2,7 @@ import logo from './logo.svg';
 import './App.css';
 import { useState } from 'react';
 import { getSentences } from "./controller"
+import image from "./GitHub-Mark-64px.png"
 
 function App() {
 
@@ -106,6 +107,7 @@ function App() {
     <div className="App">
       <header >
         <h1>translate.</h1>
+        <a href="https://github.com/MrJacooo/lerntool"><img className="btnImg" src={image}></img></a>
       </header >
       <section className="round">
         <div class="content shadow round">
