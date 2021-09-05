@@ -28,25 +28,6 @@ function App() {
   ]
 
 
-
-  function prepSentences() {
-    let inputObj = sentences[Math.floor(Math.random() * sentences.length)]
-    let input = inputObj.ger
-    //Get it as an Array to extract a random word
-    let inputArr = input.split(" ")
-    let word = inputArr[Math.floor(Math.random() * inputArr.length)]
-    //Check if word has a special Char at the end and then remove it so it remains in the String when we later split it
-    if (["!", ",", "."].some(v => word.includes(v))) {
-      word = word.slice(0, -1)
-    }
-    //Get the two curated Start and End Strings
-    let strings = input.split(word)
-    let outputObj = { original: inputObj.eng, trans1: strings[0], trans2: strings[1], word: word }
-    setCurrentSentence(outputObj)
-    setShowResults(false)
-    setUserInput("")
-  }
-
   function checkResult() {
     setResult(currentSentence.word === userInput ? "Richtig!" : "Falsch - \"" + currentSentence.word + "\" wäre richtig gewesen")
     setShowResults(true)
@@ -75,7 +56,6 @@ function App() {
     if (langList[transLang + add].internal === "ger") sentence = sentences[id].ger;
     if (langList[transLang + add].internal === "span") sentence = sentences[id].span;
     if (langList[transLang + add].internal === "fr") sentence = sentences[id].fr;
-    console.log(sentence)
     //Get it as an Array to extract a random word
     let inputArr = sentence.split(" ")
     let word = inputArr[Math.floor(Math.random() * inputArr.length)]
@@ -89,6 +69,7 @@ function App() {
 
   }
 
+  //Handles Language Changes or Sentence Changes.
   function changeLang(src) {
     setClickMe("none")
     setShowResults(false)
@@ -97,11 +78,14 @@ function App() {
     let nextSentenceId = 1000
     let obj1 = {}
     let obj2 = {}
+
+    //Sentence Change
     if (src.includes("Next")) {
       nextSentenceId = Math.floor(Math.random() * sentences.length)
       obj1 = reloadOriginal(nextSentenceId)
       obj2 = reloadTrans(nextSentenceId)
     }
+
     //Reloads the Sentences in the right Language
     if (src.includes("Original")) {
       setOriginalLang((originalLang + 1) % 4)
