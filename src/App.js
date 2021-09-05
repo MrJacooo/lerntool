@@ -5,7 +5,17 @@ import { getSentences } from "./controller"
 
 function App() {
 
+  //All of the Sentences in all the Languages
   const sentences = getSentences()
+  const langList = [
+    { display: "English", internal: "eng" },
+    { display: "German", internal: "ger" },
+    { display: "Spanish", internal: "span" },
+    { display: "French", internal: "fr" },
+    { display: "English", internal: "eng" },
+  ]
+
+
   const [userInput, setUserInput] = useState("")
   const [currentSentence, setCurrentSentence] = useState({
     trans1: "Bei Andeo zu arbeiten ist eine grossartige ",
@@ -19,13 +29,6 @@ function App() {
   const [clickMe, setClickMe] = useState("")
   const [originalLang, setOriginalLang] = useState(0)
   const [transLang, setTransLang] = useState(1)
-  const langList = [
-    { display: "English", internal: "eng" },
-    { display: "German", internal: "ger" },
-    { display: "Spanish", internal: "span" },
-    { display: "French", internal: "fr" },
-    { display: "English", internal: "eng" },
-  ]
 
 
   function checkResult() {
